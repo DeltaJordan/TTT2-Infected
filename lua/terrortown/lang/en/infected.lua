@@ -10,7 +10,8 @@ L["body_found_" .. INFECTED.abbr] = "They were an Infected!"
 L["search_role_" .. INFECTED.abbr] = "This person was an Infected!"
 L["ev_win_" .. INFECTED.defaultTeam] = "The ill Infected won the round!"
 L["target_" .. INFECTED.name] = "Infected"
-L["ttt2_desc_" .. INFECTED.name] = [[The Infected needs to infect every player to win. They infect other players by killing them.
+L["ttt2_desc_" .. INFECTED.name] =
+[[The Infected needs to infect every player to win. They infect other players by killing them.
 If a player gets infected, they become a zombie and are able to infect other players. This allows the infected to build up a whole army.
 However, there is one thing you need to keep in mind: If the host (the original, non-zombie infected player) dies or disconnects, all zombies will die.
 
@@ -22,5 +23,7 @@ L["tooltip_infection_score"] = "Infection: {score}"
 L["infection_score"] = "Infection:"
 L["title_event_infection"] = "A player got infected"
 L["desc_event_infection"] = "{host} has infected {infected} ({irole} / {iteam}) by killing them."
+L["title_event_inf_demote_traitor"] = "A Defective demoted Detectives"
+L["desc_event_inf_demote_traitor"] = "{name} has been demoted from {oldRole} to Innocent."
 
 L["label_inf_maxhealth_new_inf"] = "Max Health for new Infected zombies"

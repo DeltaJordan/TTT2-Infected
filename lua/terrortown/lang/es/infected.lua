@@ -10,7 +10,8 @@ L["body_found_" .. INFECTED.abbr] = "¡Era un Infectado!"
 L["search_role_" .. INFECTED.abbr] = "Esta persona era un Infectado."
 L["ev_win_" .. INFECTED.defaultTeam] = "¡Los infectados enfermos ganaron la ronda!"
 L["target_" .. INFECTED.name] = "Infectado"
-L["ttt2_desc_" .. INFECTED.name] = [[El Infectado necesita infectar a todos para ganar. Podrá hacer esto matándolos previamente.
+L["ttt2_desc_" .. INFECTED.name] =
+[[El Infectado necesita infectar a todos para ganar. Podrá hacer esto matándolos previamente.
 Si un jugador es infectado, cambia su apariencia y obtiene la habilidad de infectar otros jugadores. De esta manera el equipo crece.
 Hay un punto negativo a tener en cuenta: Si el principal (El Infectado Madre) muere o se desconecta, todos los jugadores infectados por este morirán.
 Si hay Jester, podrá infectarlo de igual manera. Sin perder.]]
@@ -21,5 +22,7 @@ L["infected_fists_name"] = "Garras"
 --L["infection_score"] = "Infection:"
 --L["title_event_infection"] = "A player got infected"
 --L["desc_event_infection"] = "{host} has infected {infected} ({irole} / {iteam}) by killing them."
+--L["title_event_inf_demote_traitor"] = "A Defective demoted Detectives"
+--L["desc_event_inf_demote_traitor"] = "{name} has been demoted from {oldRole} to Innocent."
 
 --L["label_inf_maxhealth_new_inf"] = "Max Health for new Infected zombies"

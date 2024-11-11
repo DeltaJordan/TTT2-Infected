@@ -10,7 +10,8 @@ L["body_found_" .. INFECTED.abbr] = "C'était un Infecté!"
 L["search_role_" .. INFECTED.abbr] = "Cette personne était un Infecté!"
 L["ev_win_" .. INFECTED.defaultTeam] = "Les terroristes Infectés ont gagné la manche!"
 L["target_" .. INFECTED.name] = "Infecté"
-L["ttt2_desc_" .. INFECTED.name] = [[L'Infecté doit infecter tout les joueurs pour gagner. Il infecte les  joueurs en les tuant.
+L["ttt2_desc_" .. INFECTED.name] =
+[[L'Infecté doit infecter tout les joueurs pour gagner. Il infecte les  joueurs en les tuant.
 Si un joueur est infecté, il ressemble à un zombie et est également capable d'infecter d'autres joueurs. Vous pouvez donc constituer une armée entière.
 Mais il y a une chose que vous devez garder à l'esprit : Si l'hôte (l'Infecté originel avec un modèle normal) meurt ou se déconnecte, chaque joueur que l'hôte a infecté meurt.
 
@@ -22,5 +23,7 @@ L["infected_fists_name"] = "Poings infectés"
 --L["infection_score"] = "Infection:"
 --L["title_event_infection"] = "A player got infected"
 --L["desc_event_infection"] = "{host} has infected {infected} ({irole} / {iteam}) by killing them."
+--L["title_event_inf_demote_traitor"] = "A Defective demoted Detectives"
+--L["desc_event_inf_demote_traitor"] = "{name} has been demoted from {oldRole} to Innocent."
 
 --L["label_inf_maxhealth_new_inf"] = "Max Health for new Infected zombies"

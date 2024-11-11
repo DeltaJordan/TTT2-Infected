@@ -23,7 +23,7 @@ L["infected_fists_name"] = "Кулаки заражённого"
 --L["infection_score"] = "Infection:"
 --L["title_event_infection"] = "A player got infected"
 --L["desc_event_infection"] = "{host} has infected {infected} ({irole} / {iteam}) by killing them."
---L["title_event_inf_demote_traitor"] = "A Defective demoted Detectives"
+--L["title_event_inf_demote_traitor"] = "An Infected demoted all Traitors"
 --L["desc_event_inf_demote_traitor"] = "{name} has been demoted from {oldRole} to Innocent."
 
 --L["label_inf_maxhealth_new_inf"] = "Max Health for new Infected zombies"

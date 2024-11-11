@@ -5,7 +5,7 @@ if SERVER then
 	resource.AddFile("materials/vgui/ttt/vskin/events/infection.vmt")
 end
 
-local maxhealth = CreateConVar("ttt2_inf_maxhealth_new_inf", 30, {FCVAR_ARCHIVE, FCVAR_NOTIFY})
+local maxhealth = CreateConVar("ttt2_inf_maxhealth_new_inf", 30, { FCVAR_ARCHIVE, FCVAR_NOTIFY })
 
 roles.InitCustomTeam(ROLE.name, {
 	icon = "vgui/ttt/dynamic/roles/icon_inf",
@@ -119,7 +119,8 @@ if SERVER then
 	local minDelay, maxDelay = 5, 25
 
 	local function CanIdle(ply)
-		return IsValid(ply) and ply:IsPlayer() and ply:IsActive() and ply:GetSubRole() == ROLE_INFECTED and (not ply.IsGhost or not ply:IsGhost())
+		return IsValid(ply) and ply:IsPlayer() and ply:IsActive() and ply:GetSubRole() == ROLE_INFECTED and
+		(not ply.IsGhost or not ply:IsGhost())
 	end
 
 	function StartZombieIdle(target, name, startDelay)
@@ -230,6 +231,39 @@ if SERVER then
 		INFECTEDS = {}
 	end)
 
+	local function JamTraitor(ply, base_role)
+		if ply:IsTerror() and ply:Alive() and base_role == ROLE_TRAITOR then
+			events.Trigger(EVENT_INF_DEMOTE_TRAITOR, ply)
+			ply:SetRole(ROLE_INNOCENT)
+
+			timer.Simple(0.1, function()
+				ply:SetCredits(0)
+			end)
+
+			--Call this function whenever a role change occurs during an active round.
+			SendFullStateUpdate()
+		end
+	end
+
+	hook.Add("TTTBeginRound", "InfectedBeginRoundForServer", function()
+		-- Force traitors to be innocent when there are infected players.
+		local has_infected = false
+		for _, ply in pairs(player.GetAll()) do
+			if ply:GetSubRole() == ROLE_INFECTED then
+				has_infected = true
+				break
+			end
+		end
+
+		if has_infected then
+			for _, ply in pairs(player.GetAll()) do
+				if ply:GetBaseRole() == ROLE_TRAITOR then
+					JamTraitor(ply, ply:GetBaseRole())
+				end
+			end
+		end
+	end)
+
 	hook.Add("PlayerDeath", "InfectedDeath", function(victim, infl, attacker)
 		if victim:GetSubRole() ~= ROLE_INFECTED and IsValid(attacker) and attacker:IsPlayer() and attacker:GetSubRole() == ROLE_INFECTED then
 			victim.infectedKiller = attacker
@@ -252,31 +286,31 @@ if SERVER then
 			ply.infectedKiller = nil
 
 			if IsValid(killer) and killer:IsActive() and killer:GetSubRole() == ROLE_INFECTED then
-
 				-- revive after 3s
 				ply:Revive(3, function(p)
-					local infectPlys = {p}
+						local infectPlys = { p }
 
-					hook.Run("TTT2ModifyInfecting", infectPlys)
+						hook.Run("TTT2ModifyInfecting", infectPlys)
 
-					for i = 1, #infectPlys do
-						events.Trigger(EVENT_INFECTION, killer, infectPlys[i])
-					end
+						for i = 1, #infectPlys do
+							events.Trigger(EVENT_INFECTION, killer, infectPlys[i])
+						end
 
-					AddInfecteds(infectPlys, killer)
+						AddInfecteds(infectPlys, killer)
 
 
-					for _, infp in ipairs(infectPlys) do
-						InitInfected(infp)
-					end
+						for _, infp in ipairs(infectPlys) do
+							InitInfected(infp)
+						end
 
-					-- do this clientside as well
-					net.Start("TTTInitInfected")
-					net.Send(infectPlys)
-				end,
-				function(p)
-					return IsValid(p) and IsValid(killer) and killer:IsActive() and killer:GetSubRole() == ROLE_INFECTED
-				end)
+						-- do this clientside as well
+						net.Start("TTTInitInfected")
+						net.Send(infectPlys)
+					end,
+					function(p)
+						return IsValid(p) and IsValid(killer) and killer:IsActive() and
+						killer:GetSubRole() == ROLE_INFECTED
+					end)
 			end
 		end
 	end)
